@@ -10,6 +10,13 @@
 #  define UNUSED
 #endif
 
+# ErlNifFunc struct was extended in OTP 18.0 for dirty NIFs
+#if defined ERL_NIF_DIRTY_NIF_OPTION
+#   define  ERL_NIF_DIRTY_NIF_OPTION_FLAGS ,0
+#else
+#   define  ERL_NIF_DIRTY_NIF_OPTION_FLAGS
+#endif
+
 ERL_NIF_TERM erlidna_encode(ErlNifEnv* env, int argc,
     const ERL_NIF_TERM argv[]);
 ERL_NIF_TERM erlidna_decode(ErlNifEnv* env, int argc,
@@ -22,8 +29,8 @@ static int prepare_resp(ErlNifEnv* env, int status, const char *s,
 
 static ErlNifFunc nif_funcs[] =
 {
-	{"encode", 1, erlidna_encode},
-	{"decode", 1, erlidna_decode}
+	{"encode", 1, erlidna_encode ERL_NIF_DIRTY_NIF_OPTION_FLAGS},
+	{"decode", 1, erlidna_decode ERL_NIF_DIRTY_NIF_OPTION_FLAGS}
 };
 
 ERL_NIF_TERM
@@ -46,7 +53,7 @@ erlidna_encode(ErlNifEnv* env, int argc UNUSED, const ERL_NIF_TERM argv[])
 			result = enif_make_badarg(env);
 		}
 	}
-	
+
 	free(data);
 	free(encoded);
 
@@ -73,7 +80,7 @@ erlidna_decode(ErlNifEnv* env, int argc UNUSED, const ERL_NIF_TERM argv[])
 			result = enif_make_badarg(env);
 		}
 	}
-	
+
 	free(data);
 	free(decoded);
 

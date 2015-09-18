@@ -1,6 +1,7 @@
 *~
 .eunit
-c_src/*.o
+.rebar/
+c_src/*.[do]
 doc
 ebin
 priv
