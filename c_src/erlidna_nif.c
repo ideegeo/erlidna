@@ -10,7 +10,7 @@
 #  define UNUSED
 #endif
 
-# ErlNifFunc struct was extended in OTP 18.0 for dirty NIFs
+/* ErlNifFunc struct was extended in OTP 18.0 for dirty NIFs */
 #if defined ERL_NIF_DIRTY_NIF_OPTION
 #   define  ERL_NIF_DIRTY_NIF_OPTION_FLAGS ,0
 #else
