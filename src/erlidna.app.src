@@ -1,7 +1,7 @@
 {application, erlidna,
  [
   {description, "libidn Erlang/C library"},
-  {vsn, "1.0"},
+  {vsn, "0.0.3"},
   {modules, [
              erlidna
             ]},
